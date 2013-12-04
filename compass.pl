@@ -92,11 +92,12 @@ while ($seqLength = shift @lengthList) {
 }
 close FID;
 print "<compass> ... done processing contigs! (1/5 steps)\n";
-# align new set of contigs against reference, with default parameters
+# align new set of contigs against reference
 print "<compass> ... running alignment with NUCmer\n";
 
-## Modified alignment steps for NUCmer compatibility. Requires MUMmer suite to be in path ().
+## Modified alignment steps for NUCmer compatibility. Requires MUMmer suite to be in path (http://sourceforge.net/projects/mummer/).
 system "nucmer --mum --prefix out --nooptimize --breaklen 500 --maxgap 500 compassRun.TEMP.ref compassRun.TEMP.contigs > nucmer.log";
+
 ## This filters the alignment for the longest increasing subset with respect to the reference.  If no filtering is performed, metrics do not make much sense.
 system "delta-filter -r out.delta > out.filter";
 
