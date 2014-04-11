@@ -96,10 +96,10 @@ print "<compass> ... done processing contigs! (1/5 steps)\n";
 print "<compass> ... running alignment with NUCmer\n";
 
 ## Modified alignment steps for NUCmer compatibility. Requires MUMmer suite to be in path (http://sourceforge.net/projects/mummer/).
-system "nucmer --mum --prefix out --nooptimize --breaklen 500 --maxgap 500 compassRun.TEMP.ref compassRun.TEMP.contigs > nucmer.log";
+system "nucmer compassRun.TEMP.ref compassRun.TEMP.contigs > nucmer.log";
 
 ## This filters the alignment for the longest increasing subset with respect to the reference.  If no filtering is performed, metrics do not make much sense.
-system "delta-filter -r out.delta > out.filter";
+system "delta-filter -q out.delta > out.filter";
 
 ## Convert delta file to MAF using delta2maf script packaged with mugsy (http://mugsy.sourceforge.net/) in the MUMmer subdirectory.
 system "delta2maf out.filter > out.maf";
